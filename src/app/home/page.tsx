@@ -4,7 +4,7 @@ import Image from "next/image";
 export default async function Page() {
   const photos = await getRandomPhotos();
   return (
-    <>
+    <div className="text-center">
       {photos.map((photo) => (
         <Image
           key={photo.id}
@@ -15,16 +15,17 @@ export default async function Page() {
           className="h-auto inline-block"
         />
       ))}
-    </>
+    </div>
   );
 }
 
 export async function getRandomPhotos(): Promise<Photos[]> {
   let pageNumber = 1;
+  let itemsPerPage = 20;
 
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   const unsplashURL = "https://api.unsplash.com/";
-  const randomPhotos = `${unsplashURL}photos/?page=${pageNumber}`;
+  const randomPhotos = `${unsplashURL}photos/?page=${pageNumber}&per_page=${itemsPerPage}`;
 
   const response = await fetch(randomPhotos, {
     headers: {
