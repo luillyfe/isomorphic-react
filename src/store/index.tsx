@@ -4,10 +4,10 @@ type DataSource = {
 
 global.memory = { pageNumber: 1 };
 
-function saveToDatasource(data: number): void {
+export function saveToDatasource(data: number): void {
   global.memory.pageNumber = data;
 }
 
-function getFromDatasource(): DataSource {
+export function getFromDatasource(): DataSource {
   return global.memory;
 }
