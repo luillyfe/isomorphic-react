@@ -1,10 +1,16 @@
 import Image from "next/image";
 
 import { Photos, mapToPhotos } from "@/utils";
+import { getFromDatasource } from "@/store";
 import Footer from "./components/Footer";
 
+let photos: Photos[] = [];
 export default async function Page() {
-  const photos = await getRandomPhotos();
+  let { pageNumber } = getFromDatasource();
+  let itemsPerPage = 20;
+
+  const newPhotos = await getRandomPhotos(pageNumber, itemsPerPage);
+  photos = [...photos, ...newPhotos];
 
   return (
     <div className="text-center">
@@ -24,10 +30,10 @@ export default async function Page() {
   );
 }
 
-export async function getRandomPhotos(): Promise<Photos[]> {
-  let pageNumber = 1;
-  let itemsPerPage = 20;
-
+export async function getRandomPhotos(
+  pageNumber: number,
+  itemsPerPage: number
+): Promise<Photos[]> {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   const unsplashURL = "https://api.unsplash.com/";
   const randomPhotos = `${unsplashURL}photos/?page=${pageNumber}&per_page=${itemsPerPage}`;

@@ -1,7 +1,10 @@
 "use server";
 
-// TODO: remove test action
-export async function sendAction(data: string) {
-  console.log("Run on the server!");
-  console.log(data);
+import { revalidatePath } from "next/cache";
+import { getFromDatasource, saveToDatasource } from "@/store";
+
+export async function getNextPage() {
+  const { pageNumber } = getFromDatasource();
+  saveToDatasource(pageNumber + 1);
+  revalidatePath("/home");
 }
