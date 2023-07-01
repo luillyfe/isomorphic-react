@@ -1,20 +1,25 @@
-import { Photos, mapToPhotos } from "@/utils";
 import Image from "next/image";
+
+import { Photos, mapToPhotos } from "@/utils";
+import Footer from "./components/Footer";
 
 export default async function Page() {
   const photos = await getRandomPhotos();
+
   return (
     <div className="text-center">
       {photos.map((photo) => (
         <Image
           key={photo.id}
           src={photo.rawURL}
-          alt={photo.alt}
+          alt={photo.alt || "ramdon"}
           width={photo.width}
           height={0}
-          className="h-auto inline-block"
+          className="inline-block h-auto"
+          priority
         />
       ))}
+      <Footer />
     </div>
   );
 }
