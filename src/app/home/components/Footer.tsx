@@ -1,9 +1,16 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { sendAction } from "@/app/actions";
+import { getNextPage } from "@/app/actions";
+import usePageBottom from "@/hooks/usePageBottom";
 
+// TODO: If images are still loading, disable scroll handler
 export default function Footer() {
-  const msg = "Hello, from client";
-  return <div onClick={() => sendAction(msg)}>Footer</div>;
+  const isAtPageBottom = usePageBottom();
+
+  useEffect(() => {
+    if (isAtPageBottom) getNextPage();
+  }, [isAtPageBottom]);
+
+  return <div>Footer</div>;
 }
