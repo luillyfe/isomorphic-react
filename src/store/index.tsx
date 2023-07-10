@@ -2,6 +2,9 @@ type DataSource = {
   pageNumber: number;
 };
 
+declare global {
+  var memory: DataSource;
+}
 global.memory = { pageNumber: 1 };
 
 export function saveToDatasource(data: number): void {

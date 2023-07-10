@@ -30,7 +30,7 @@ export default async function Page() {
   );
 }
 
-export async function getRandomPhotos(
+async function getRandomPhotos(
   pageNumber: number,
   itemsPerPage: number
 ): Promise<Photos[]> {
