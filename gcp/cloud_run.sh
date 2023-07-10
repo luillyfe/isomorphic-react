@@ -14,3 +14,5 @@ Consider running your workload in a region with greater capacity, decreasing you
 
 # Solution
 Increase memory until it gets ready and running
+
+    --memory 8G \
